@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xyt="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:Enneto"
+             xmlns:customView="clr-namespace:Enneto.Views.Toolbar" xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+              x:Class="Enneto.MainPage"
+              Title="De Segunda">
+
+    <ContentPage.ToolbarItems >
+        <ToolbarItem    IconImageSource="carrito.png"
+                        Order="Default"
+                        x:Name="Carrito"
+                        Clicked="Carrito_Clicked"/>
+
+        <ToolbarItem IconImageSource="usuarioi.png"
+                     Order="Default"
+                     x:Name="IniciarSesion"
+                     Clicked="IniciarSesion_Clicked"/>
+
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        
+    <ScrollView>
+            <StackLayout>
+
+                <!--Carrusel-->
+                <CarouselView ItemsSource="{Binding producto}" 
+                              HeightRequest="260" 
+                              PeekAreaInsets="0"
+                              Position="3" 
+                              x:Name="Complemento" 
+                              IndicatorView="{x:Reference Indicador}"
+                              CurrentItemChanged="Complemento_CurrentItemChanged">
+
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate >
+                            <StackLayout>
+                                
+                                <!--Aqui se instancia los articulos relevantes-->
+                                <Frame HeightRequest="250" 
+                                       BackgroundColor="White" 
+                                       Padding="0"
+                                       HasShadow="True" 
+                                       Margin="10,10,10,5" 
+                                       CornerRadius="15"
+                                       HorizontalOptions="CenterAndExpand">
+
+                                    <Grid>
+                                        <!--Imagen de Fondo-->
+                                        <StackLayout BackgroundColor="Black">
+                                            <ImageButton Source="{Binding Imagen}" 
+                                                     HeightRequest="350"
+                                                     WidthRequest="380"
+                                                     Opacity="0.5"
+                                                     Aspect="AspectFill"
+                                                     BackgroundColor="Black"
+                                                     Clicked="ImageButton_Clicked"
+                                                     CommandParameter="{Binding id}"/>
+                                        </StackLayout>
+
+                                        <!--Cabeza de la tarjeta-->
+                                        <StackLayout Orientation="Horizontal" 
+                                                 Margin="10,6,10,0"
+                                                 VerticalOptions="StartAndExpand">
+
+                                            <!--<Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding NombreProducto}" />
+                                                    <Span Text="{Binding id}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>-->
+
+                                            <ImageButton Source="carrito.png" 
+                                                   HeightRequest="35"
+                                                   Aspect="AspectFit"
+                                                   HorizontalOptions="EndAndExpand"
+                                                   Clicked="ImageButton_Clicked_2"
+                                                   BackgroundColor="White"
+                                                   CornerRadius="20"
+                                                   Padding="7"
+                                                   CommandParameter="{Binding id}">
+                                            </ImageButton>
+
+                                            <ImageButton    Source="{Binding categoria}"  
+                                                            WidthRequest="35"
+                                                            Padding="6"
+                                                            CornerRadius="20"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            CommandParameter="{Binding idCategoria}"
+                                                            Clicked="ImageButton_Clicked_3"
+                                                            BackgroundColor="White"/>
+
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal" 
+                                                     Margin="12,0,10,10" 
+                                                     VerticalOptions="EndAndExpand" >
+
+                                            <Label Text="{Binding NombreProducto}" 
+                                                   TextColor="White" 
+                                                   FontSize="17" 
+                                                   FontAttributes="None"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="FillAndExpand" />
+
+                                            <StackLayout HorizontalOptions="EndAndExpand">
+                                                <Label  TextColor="White" 
+                                                        FontSize="13"
+                                                        FontAttributes="None" 
+                                                        WidthRequest="75"
+                                                        HorizontalTextAlignment="Center"
+                                                        HorizontalOptions="EndAndExpand"
+                                                        VerticalOptions="EndAndExpand"
+                                                        TextDecorations="Strikethrough">
+                                                    <Label.FormattedText >
+                                                        <FormattedString>
+                                                            <Span Text="S/" />
+                                                            <Span Text="{Binding Precio}" x:Name="Precio"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <Label  TextColor="White" 
+                                                        FontSize="15"
+                                                        FontAttributes="None" 
+                                                        WidthRequest="80"
+                                                        HorizontalTextAlignment="Center"
+                                                        HorizontalOptions="EndAndExpand"
+                                                        VerticalOptions="EndAndExpand">
+                                                    <Label.FormattedText >
+                                                        <FormattedString>
+                                                            <Span Text="S/" />
+                                                            <Span Text="{Binding Oferta}" x:Name="Oferta"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView IndicatorColor="Gray" 
+                               IndicatorSize="8" 
+                               SelectedIndicatorColor="Red" 
+                               IndicatorsShape="Circle" 
+                               x:Name="Indicador" 
+                               HorizontalOptions="StartAndExpand"
+                               Margin="10,0,0,0"/>
+
+                <!--Texto Categorias-->
+        <StackLayout >
+            <Label Text="Categorias" 
+                   TextColor="Black" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   Margin="0,25,0,5" 
+                   HorizontalTextAlignment="Center"/>
+
+        </StackLayout>
+
+        <!--Categorias-->
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="0,0,0,25">
+
+                <CarouselView ItemsSource="{Binding categoria}" 
+                              HeightRequest="85"  
+                              PeekAreaInsets="159" 
+                              Position="4" 
+                              IsBounceEnabled="False">
+                    <CarouselView.ItemTemplate >
+                        <DataTemplate >
+                                <StackLayout  Padding="0,0,0,0" Margin="0">
+                                    <ImageButton HorizontalOptions="Center"
+                                            Source="{Binding ImagenCategoria}" 
+                                            HeightRequest="60" 
+                                            Padding="10"
+                                            BackgroundColor="#EFD6DA" 
+                                            CornerRadius="7"
+                                            Clicked="ImageButton_Clicked_1"
+                                            CommandParameter="{Binding idCategoria}"/>
+                                    <Label HorizontalOptions="Center"
+                                        Text="{Binding NombreCategoria}" 
+                                        TextColor="Black" 
+                                        FontSize="13" 
+                                        FontAttributes="None" 
+                                        VerticalTextAlignment="Center" 
+                                        Margin="5,2"/>
+                                </StackLayout>
+                            </DataTemplate>
+                    </CarouselView.ItemTemplate>
+
+            </CarouselView> 
+
+
+    </StackLayout>
+
+        <!--Texto Libreros-->
+        <Label Text="Categoria:"
+                TextColor="Black" 
+                FontSize="19" 
+                FontAttributes="Bold" 
+                Margin="15,15,0,0"
+                x:Name="TituloPrimeraSeccion"/>
+
+            <!--Carrusel 3-->
+                <CarouselView ItemsSource="{Binding producto}" 
+                              HeightRequest="300" 
+                              PeekAreaInsets="112" 
+                              Position="0" 
+                              x:Name="Complemento2" 
+                              CurrentItemChanged="Complemento2_CurrentItemChanged">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate >
+
+                            <StackLayout>
+                                <!--Aqui se instancia los articulos relevantes-->
+                                <Frame HeightRequest="270" 
+                                   WidthRequest="170"
+                                   BackgroundColor="White" 
+                                   Padding="0"
+                                   HasShadow="True" 
+                                   Margin="5" 
+                                   CornerRadius="10"
+                                   HorizontalOptions="CenterAndExpand">
+
+                                    <Grid>
+                                        <!--Imagen de Fondo-->
+                                        <StackLayout BackgroundColor="Black">
+                                            <ImageButton Source="{Binding Imagen}" 
+                                                     HeightRequest="350" Opacity="0.5"
+                                                     Aspect="AspectFill"
+                                                     BackgroundColor="Black"
+                                                     x:Name="Producto2"
+                                                     Clicked="Producto2_Clicked"
+                                                     CommandParameter="{Binding id}"/>
+                                        </StackLayout>
+
+                                        <!--Cabeza de la tarjeta-->
+                                        <StackLayout Orientation="Horizontal" 
+                                                 Margin="10,10,10,0"
+                                                 VerticalOptions="StartAndExpand">
+
+                                            <Label Text="{Binding NombreProducto}" 
+                                                   TextColor="White" 
+                                                   FontSize="14" 
+                                                   FontAttributes="None"
+                                                   WidthRequest="95"
+                                                   HorizontalOptions="FillAndExpand"/>
+
+                                            <ImageButton Source="carrito.png" 
+                                                   HeightRequest="60"
+                                                   WidthRequest="30"
+                                                   VerticalOptions="Start"
+                                                   Padding="4"
+                                                   CornerRadius="13"
+                                                   x:Name="Carrito2"
+                                                   HorizontalOptions="EndAndExpand"
+                                                   Clicked="Carrito2_Clicked"
+                                                   BackgroundColor="White"
+                                                   CommandParameter="{Binding id}">
+                                            </ImageButton>
+
+                                        </StackLayout>
+
+
+                                        <StackLayout Orientation="Horizontal" 
+                                                     Margin="12,0,10,10" 
+                                                     VerticalOptions="EndAndExpand" >
+                                            <ImageButton 
+                                                    Source="{Binding categoria}" 
+                                                    HeightRequest="40" 
+                                                    WidthRequest="40"
+                                                    Padding="6"
+                                                    CornerRadius="17"
+                                                    VerticalOptions="CenterAndExpand"
+                                                    Aspect="AspectFit" 
+                                                    Clicked="ImageButton_Clicked_3"
+                                                    CommandParameter="{Binding idCategoria}"
+                                                    BackgroundColor="White"/>
+
+                                            <StackLayout HorizontalOptions="EndAndExpand">
+                                                <Label  TextColor="White" FontSize="13"
+                                                        FontAttributes="None" 
+                                                        HorizontalOptions="EndAndExpand"
+                                                        VerticalOptions="EndAndExpand">
+                                                    <Label.FormattedText >
+                                                        <FormattedString>
+                                                            <Span Text="S/" TextDecorations="Strikethrough"/>
+                                                            <Span Text="{Binding Precio}" TextDecorations="Strikethrough" x:Name="Precio"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <Label  TextColor="White" FontSize="15"
+                                                FontAttributes="None" 
+                                                HorizontalOptions="EndAndExpand"
+                                                VerticalOptions="EndAndExpand">
+                                                    <Label.FormattedText >
+                                                        <FormattedString>
+                                                            <Span Text="S/" />
+                                                            <Span Text="{Binding Oferta}" x:Name="Oferta"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+
+                                        </StackLayout>
+
+                                    </Grid>
+                                </Frame>
+
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+
+
+                <StackLayout>
+
+                    <Label Text="Productos:" 
+                           TextColor="Black" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           Margin="15,0,0,0" 
+                           HorizontalTextAlignment="Start"/>
+                    <CollectionView          Margin="10,0,10,0"
+                                         Grid.ColumnSpan="4"
+                                         ItemsSource="{Binding producto}"
+                                         VerticalScrollBarVisibility="Never"
+                                         VerticalOptions="Start"
+                                         BackgroundColor="White" 
+                                         x:Name="ListaColeccion"
+                                         SelectionMode="Single"
+                                         SelectionChanged="ListaColeccion_SelectionChanged" >
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             Span="2" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <PanCake:PancakeView CornerRadius="15">
+                                    <!--Configuración de Colores al Seleccionar-->
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="White" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="#9E9C9C" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+
+                                    <Grid ColumnDefinitions="*,*" RowDefinitions="*,Auto,Auto,Auto,Auto" Padding="7" HeightRequest="380">
+
+                                        <!--Contenido-->
+                                        <PanCake:PancakeView CornerRadius="15,15,15,15" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                                            <Image Source="{Binding Imagen}" Aspect="AspectFill" x:Name="SeleccionadoElemento"/>
+                                        </PanCake:PancakeView>
+
+                                        <ImageButton Grid.Row="0" Grid.Column="1" Margin="0,7,5,0"  Source="carrito.png" VerticalOptions="Start" HorizontalOptions="End" HeightRequest="37" Padding="6" WidthRequest="40" CornerRadius="20" x:Name="BotonCarrito" Clicked="BotonCarrito_Clicked" BackgroundColor="White" CommandParameter="{Binding id}"/>
+
+
+                                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" HeightRequest="22" MaxLines="2" Text="{Binding NombreProducto}" Margin="5,5,0,0" TextColor="Black" FontAttributes="Bold"/>
+
+                                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="11"  MaxLines="4" Text="{Binding Descripcion}" Margin="5,0,0,0" TextColor="Black"/>
+
+                                        <StackLayout Grid.Row="3" Grid.Column="1" HorizontalOptions="End" Margin="0,2,10,0" Orientation="Horizontal">
+                                            <Image HeightRequest="20"  WidthRequest="33" Aspect="AspectFill" Source="Puntuacion.png"/>
+                                            <Label   FontSize="15"  MaxLines="4" Text="{Binding Calificacion}" Margin="-8,0,0,0" TextColor="Black" />
+                                        </StackLayout>
+
+
+                                        <Label Grid.Row="3" Grid.Column="0" Margin="5,2,5,0" HorizontalOptions="Start" Grid.ColumnSpan="2" MaxLines="2" TextDecorations="Strikethrough">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="S/ " FontSize="13" TextColor="Black" x:Name="TipoPrecioNom"/>
+                                                    <Span Text="{Binding Precio}"  FontSize="15" TextColor="Black" x:Name="PrecioNormal" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <PanCake:PancakeView Margin="5,-3,5,15" Grid.Row="4" Grid.Column="0" BackgroundColor="#F63854" CornerRadius="10">
+                                            <Label Margin="10,2" VerticalOptions="Center" HorizontalOptions="Start" Grid.ColumnSpan="2" x:Name="ContenedorOferta" >
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="S/ " FontSize="13" TextColor="White" x:Name="TipoPrecioOf"/>
+                                                        <Span Text="{Binding Oferta}" FontAttributes="Bold" FontSize="13" TextColor="White" x:Name="PrecioOferta"  />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </PanCake:PancakeView>
+
+                                    </Grid>
+                                </PanCake:PancakeView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+
+            </StackLayout>
+        
+        
+    
+    </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>

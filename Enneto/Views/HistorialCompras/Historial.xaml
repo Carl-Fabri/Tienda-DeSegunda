@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Enneto.Views.HistorialCompras.Historial"
+             Title="Historial de Compras">
+
+    <ScrollView>
+       
+    <CollectionView    x:Name="MyListView"
+                       ItemsSource="{Binding Historial}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+
+                    <StackLayout>
+                        <Grid RowDefinitions="*,*,*,*" 
+                              ColumnDefinitions="*,*"
+                              Padding="20,20,20,10" 
+                              Margin="0,0,0,10">
+                        
+                        <!--NombrerProducto-->
+                        <Label  Grid.Row="0"   
+                                Text="{Binding NombreProducto}" 
+                                FontAttributes="Bold"
+                                FontSize="20"/>
+
+                        <!--Fecha-->
+                        <Label  Grid.Row="1"
+                                Grid.Column="0"
+                                FontSize="15"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Start">
+                            <Label.FormattedText >
+                                <FormattedString>
+                                    <Span Text="Fecha: " />
+                                    <Span x:Name="FechaCompra" Text="{Binding Fecha}"/>
+                                </FormattedString>
+                            </Label.FormattedText >
+                        </Label>
+                    
+                        <!--Cantidad-->
+                        <Label  Grid.Row="2"
+                                Grid.Column="0"
+                                FontSize="15"
+                                HorizontalOptions="Start">
+                            <Label.FormattedText >
+                                <FormattedString>
+                                    <Span Text="Cantidad: " />
+                                        <Span x:Name="Cantidad" Text="{Binding Cantidad}"/>
+                                </FormattedString>
+                            </Label.FormattedText >
+                        </Label>
+
+                        <!--Pago-->
+                        <Label  Grid.Row="3"
+                                Grid.Column="0"
+                                FontSize="15"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Start">
+                            <Label.FormattedText >
+                                <FormattedString>
+                                    <Span Text="Precio: " />
+                                        <Span x:Name="Pago" Text="{Binding PrecioFinal}"/>
+                                </FormattedString>
+                            </Label.FormattedText >
+                        </Label>
+
+                        <!--Direccion-->
+                        <Label  Grid.Row="1"
+                                Grid.Column="1"
+                                FontSize="15"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Start">
+                            <Label.FormattedText >
+                                <FormattedString>
+                                    <Span Text="Direccion 1: " />
+                                        <Span x:Name="Direccion1" Text="{Binding Direccion1}"/>
+                                </FormattedString>
+                            </Label.FormattedText >
+                        </Label>
+
+                        <!--Direccion2-->
+                        <Label  Grid.Row="2"
+                                Grid.Column="1"
+                                FontSize="15"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Start">
+                            <Label.FormattedText >
+                                <FormattedString>
+                                    <Span Text="Direccion 2: " />
+                                        <Span x:Name="Direccion2" Text="{Binding Direccion2}"/>
+                                </FormattedString>
+                            </Label.FormattedText >
+                        </Label>
+
+                        <!--Direccion3-->
+                            <Label  Grid.Row="3"
+                                Grid.Column="1"
+                                FontSize="15"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Start">
+                                <Label.FormattedText >
+                                    <FormattedString>
+                                        <Span Text="Direccion 3: " />
+                                        <Span x:Name="Direccion3" Text="{Binding Direccion3}"/>
+                                    </FormattedString>
+                                </Label.FormattedText >
+                            </Label>
+                        </Grid>
+
+                        <BoxView Color="Gray" HeightRequest="1" Grid.Row="3" Opacity="0.5"/>
+                    </StackLayout>
+                
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+    </ScrollView>
+</ContentPage>

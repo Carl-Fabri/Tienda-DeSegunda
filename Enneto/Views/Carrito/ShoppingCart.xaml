@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+    
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:Enneto.ViewModel" xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Enneto.Views.ShoppingCart"
+             Title="Carrito de Compras">
+    
+    <ScrollView>
+        <!-- Main structure-->
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="0" BackgroundColor="#F63854">
+            <!-- 2.1 Header-->
+
+            <!-- 2.2 Gift list -->
+            <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="Start" BackgroundColor="#F63854">
+
+                <!--<RefreshView IsRefreshing="False">-->
+
+                    <CollectionView  VerticalScrollBarVisibility="Never"
+                                     HeightRequest="{OnPlatform Android='440', iOS='515'}" 
+                                     BackgroundColor="White" 
+                                     ItemsSource="{Binding Carritos}"
+                                     SelectionMode="Single"
+                                     SelectionChanged="CollectionView_SelectionChanged">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid RowDefinitions="76,7*,Auto" 
+                                      ColumnDefinitions="120,130,20" 
+                                      Padding="20,20,20,10" 
+                                      BackgroundColor="White">
+                                    <PanCake:PancakeView Grid.Row="0" 
+                                                         Grid.Column="0" 
+                                                         Grid.RowSpan="3" 
+                                                         CornerRadius="20">
+                                        <Image Source="{Binding ImagenProducto}"  
+                                               Aspect="AspectFill" />
+                                    </PanCake:PancakeView>
+                                    <!--<Label Grid.Row="0" Grid.Column="1" Text="1" Grid.ColumnSpan="2" FontSize="13" Padding="10,10,0,0" TextColor="#9a9bab" FontAttributes="Bold"/>-->
+                                    <Label Grid.Row="0" 
+                                           Grid.Column="1" 
+                                           Text="{Binding NombreProducto}" 
+                                           MaxLines="3" Padding="10,0,0,0" 
+                                           FontSize="17" />
+
+                                    <Label Grid.Row="1" 
+                                           Grid.Column="1" 
+                                           Padding="10,0,-10,10" 
+                                           FontSize="14" 
+                                           FontAttributes="Bold"
+                                           MaxLines="3"
+                                           TextColor="Black">
+                                        <Label.FormattedText >
+                                            <FormattedString>
+                                                <Span Text="Oferta: S/" />
+                                            <Span Text="{Binding PrecioOferta}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+
+                                    </Label>
+
+                                <Label  Grid.Row="2" 
+                                        Grid.Column="1" 
+                                        Padding="10,0,0,0"  
+                                        FontSize="14" >
+
+                                    <Label.FormattedText >
+                                        <FormattedString>
+                                            <Span Text="Normal: S/" />
+                                            <Span Text="{Binding Precio}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+
+                                </Label>
+
+                                <Label  Grid.Row="0" 
+                                        Grid.Column="3" 
+                                        Padding="10,0,0,0"  
+                                        FontSize="14" 
+                                        Text="Cantidad:"
+                                        VerticalOptions="Start"
+                                        HorizontalOptions="Start"
+                                        Margin="-10,0,0,0"/>
+                                <PanCake:PancakeView Grid.Row="0" 
+                                                         Grid.Column="3" 
+                                                         CornerRadius="20"
+                                                         HeightRequest="29" 
+                                                         WidthRequest="20"
+                                                         Margin="0,10,0,0"
+                                                         VerticalOptions="End"
+                                                         BackgroundColor="#F63854">
+                                        <Entry x:Name="CantidadProductos"
+                                               Grid.Row="0" 
+                                               Grid.Column="3"
+                                               FontSize="16"
+                                               Margin="0,0,0,-8"
+                                               VerticalOptions="End" 
+                                               HeightRequest="60"
+                                               HorizontalTextAlignment="Center" 
+                                               Text="{Binding CantidaProducto, Mode=TwoWay}" 
+                                               Keyboard="Numeric"
+                                               TextChanged="Entry_TextChanged" 
+                                               Completed="CantidadProductos_Completed"
+                                               TextColor="White" 
+                                               MaxLength="2" 
+                                               />
+                                    </PanCake:PancakeView>
+
+                                    <!--Boton de Agregar Elemento-->
+                                    <Button Grid.Row="1" Grid.Column="3" 
+                                            VerticalOptions="Start" 
+                                            Margin="0,0,0,0" 
+                                            FontSize="20"
+                                            BackgroundColor="#F63854" 
+                                            Text="+" 
+                                            TextColor="White" 
+                                            HorizontalOptions="Start" 
+                                            HeightRequest="30" 
+                                            WidthRequest="34" 
+                                            CornerRadius="20"   
+                                            Padding="0,-5,0,0"
+                                            x:Name="{Binding IdProducto}"
+                                            CommandParameter="{Binding IdProducto}"
+                                            Clicked="Button_Clicked_1"/>
+
+                                    <!--Boton de Eliminar Elemento-->
+                                    <Button Grid.Row="1" 
+                                            Grid.Column="3" 
+                                            FontSize="25" 
+                                            VerticalOptions="Start" 
+                                            Margin="0,0,0,0" 
+                                            BackgroundColor="#F63854" 
+                                            x:Name="{Binding IdProducto}"
+                                            CommandParameter="{Binding IdProducto}"
+                                            Text="-" 
+                                            TextColor="White" 
+                                            HorizontalOptions="End" 
+                                            HeightRequest="30" 
+                                            WidthRequest="34" 
+                                            CornerRadius="20" 
+                                            Padding="0,-5,0,0"
+                                            Clicked="Button_Clicked_2"/>
+
+                                    <!--Boton de Remover Elemento-->
+                                    <Button Grid.Row="2" 
+                                            Grid.Column="3" 
+                                            FontSize="12" 
+                                            VerticalOptions="Start" 
+                                            BackgroundColor="#F63854" 
+                                            Text="Remover" 
+                                            Padding="0,-3,0,0" 
+                                            TextColor="White" 
+                                            CommandParameter="{Binding IdProducto}"
+                                            HorizontalOptions="Center" 
+                                            HeightRequest="25"            
+                                            WidthRequest="75" 
+                                            CornerRadius="20" 
+                                            x:Name="RemoverProducto"
+                                            Clicked="RemoverProducto_Clicked"/>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                <!--</RefreshView>-->
+            </StackLayout>
+            
+            <!--Adding button corners -->
+            <PanCake:PancakeView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" CornerRadius="0,0,80,80" Margin="0,0,0,25" BackgroundColor="White" HeightRequest="{OnPlatform Android='50', iOS='75'}"/>
+
+            <!-- Payment -->
+            
+            <Grid Grid.Row="3"  Margin="0,-10,0,0" Grid.Column="0" Padding="15,0,5,5" HeightRequest="100">
+                <!--<Label  Grid.Row="0" Grid.Column="0" TextColor="White" Text="Pago: " Margin="0,5,0,0"/>
+                <Label Grid.Row="1" Grid.Column="0" TextColor="White" Text="Descento:" />-->
+                <Label Grid.Row="0" Grid.Column="0" TextColor="White" Text="Precio Final :" FontSize="15" VerticalOptions="End" HorizontalOptions="CenterAndExpand"   />
+                <Label Grid.Row="1" Grid.Column="0" TextColor="White"
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="Center" FontAttributes="Bold" FontSize="23">
+                    <Label.FormattedText >
+                        <FormattedString>
+                            <Span Text="S/" />
+                            <Span x:Name="PrecioFinal" Text="0.00"/>
+                        </FormattedString>
+                    </Label.FormattedText >
+                </Label>
+            </Grid>
+
+            <Button Grid.Row="3" Grid.RowSpan="2" Grid.Column="1" VerticalOptions="Center" BackgroundColor="White" Text="Pagar" TextColor="Black" CornerRadius="20" Margin="0,10,30,30" WidthRequest="140" FontSize="17" FontAttributes="Bold" HeightRequest="55" x:Name="ProcesarCarro" Clicked="Button_Clicked"/>
+            
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

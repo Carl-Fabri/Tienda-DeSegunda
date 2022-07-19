@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Enneto.Views.Pagos.PagoConAgora">
+
+    <ContentPage.Content>
+
+        <StackLayout BackgroundColor="White">
+            <StackLayout BackgroundColor="White"
+                         VerticalOptions="Center">
+
+                <ImageButton    Margin="0,20,0,0"
+                                Source="Agora.png"
+                                HeightRequest="70"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Center"
+                                BackgroundColor="Transparent"/>
+
+                <Label  
+                    Text="Paga aquí con agora escaneando el codigo QR"
+                    HorizontalTextAlignment="Center"
+                    WidthRequest="350"
+                    TextColor="SteelBlue"
+                    HorizontalOptions="Center"
+                    FontFamily=""
+                    FontAttributes="Bold"
+                    FontSize="23"/>
+
+                <StackLayout        
+                                     WidthRequest="850"
+                                     Padding="-35"
+                                     HeightRequest="420"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="End"
+                                     x:Name="ContenedorQR">
+                    <Image WidthRequest="500"
+                           HeightRequest="325"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           Source="CodigoAgora.PNG"/>
+
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

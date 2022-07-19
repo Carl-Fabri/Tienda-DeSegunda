@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Enneto.Views.Pagos.PagoConPlin">
+
+    <StackLayout BackgroundColor="#4be1ce">
+        <StackLayout BackgroundColor="#4be1ce"
+                         VerticalOptions="Center"
+                         x:Name="ContenedorQR">
+
+            <Image   Margin="0,20,0,0"
+                            Source="plinlogo.png"
+                            HeightRequest="150"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"/>
+
+            <Label Text="Escanea y paga" 
+                           TextColor="White"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           FontAttributes="Bold"
+                           Margin="0,0,0,15"/>
+
+            <PanCake:PancakeView BackgroundColor="White" 
+                                     WidthRequest="190"
+                                     HeightRequest="240"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Start"
+                                     CornerRadius="8">
+
+                <StackLayout>
+                    <Image  Source="CodigoQR.png"
+                            Aspect="AspectFit"
+                            BackgroundColor="Transparent" 
+                            VerticalOptions="Start"
+                            Margin="0,0,0,0"
+                            HorizontalOptions="CenterAndExpand"
+                            HeightRequest="200"
+                            WidthRequest="300"/>
+
+                    <Label     Text="DeSegunda" 
+                               Margin="0,-5,0,0"
+                               TextColor="Black"
+                               FontAttributes="Bold"
+                               FontSize="19"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+                </StackLayout>
+            </PanCake:PancakeView>
+
+
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:Enneto" xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Enneto.CategoriasPage" >
+
+    <ContentPage.ToolbarItems >
+        <ToolbarItem    IconImageSource="carrito.png"
+                        Order="Default"
+                        x:Name="Carrito"
+                        Clicked="Carrito_Clicked"/>
+
+        <ToolbarItem IconImageSource="Iniciar.png"
+                     Order="Default"
+                     x:Name="IniciarSesion"
+                     Clicked="IniciarSesion_Clicked" />
+
+    </ContentPage.ToolbarItems>
+
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Content>
+
+        <StackLayout HeightRequest="200" Margin="0,0,0,0">
+
+            <Label Text="Categoria:" FontSize="15" Margin="25,15,0,0"/>
+            <Label Text="Estanste" FontSize="35" Margin="25,-10,0,0" x:Name="Titulo" TextColor="Black"/>
+
+            <PanCake:PancakeView BackgroundColor="LightGray" CornerRadius="15" Margin="25,10,25,20"  >
+                <SearchBar Placeholder="Buscar" Margin="-5,0,0,0"  HorizontalOptions="Fill" HeightRequest="40" 
+                           FontSize="17" x:Name="Buscador" TextChanged="Buscador_TextChanged" />
+            </PanCake:PancakeView>
+
+            <StackLayout>
+                <CollectionView          Margin="10,0,10,0"
+                                         Grid.ColumnSpan="4"
+                                         ItemsSource="{Binding producto}"
+                                         VerticalScrollBarVisibility="Never"
+                                         VerticalOptions="Start"
+                                         BackgroundColor="White" 
+                                         x:Name="ListaColeccion"
+                                         SelectionMode="Single"
+                                         SelectionChanged="ListaColeccion_SelectionChanged" >
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                             Span="2" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <PanCake:PancakeView CornerRadius="15">
+                                <!--Configuración de Colores al Seleccionar-->
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="White" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#9E9C9C" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Grid ColumnDefinitions="*,*" RowDefinitions="*,Auto,Auto,Auto,Auto" Padding="7" HeightRequest="380">
+
+                                    <!--Contenido-->
+                                <PanCake:PancakeView CornerRadius="15,15,15,15" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                                    <Image Source="{Binding Imagen}" Aspect="AspectFill" x:Name="SeleccionadoElemento"/>
+                                </PanCake:PancakeView>
+
+                                <ImageButton Grid.Row="0" Grid.Column="1" Margin="0,7,5,0"  Source="carrito.png" VerticalOptions="Start" HorizontalOptions="End" HeightRequest="37" Padding="6" WidthRequest="40" CornerRadius="20" x:Name="BotonCarrito" Clicked="BotonCarrito_Clicked" BackgroundColor="White" CommandParameter="{Binding id}"/>
+
+
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="15" HeightRequest="22" MaxLines="2" Text="{Binding NombreProducto}" Margin="5,5,0,0" TextColor="Black" FontAttributes="Bold"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" FontSize="11"  MaxLines="4" Text="{Binding Descripcion}" Margin="5,0,0,0" TextColor="Black"/>
+ 
+                                <StackLayout Grid.Row="3" Grid.Column="1" HorizontalOptions="End" Margin="0,2,10,0" Orientation="Horizontal">
+                                    <Image HeightRequest="20"  WidthRequest="33" Aspect="AspectFill" Source="Puntuacion.png"/>
+                                    <Label   FontSize="15"  MaxLines="4" Text="5" Margin="-8,0,0,0" TextColor="Black" />
+                                </StackLayout>
+
+
+                                <Label Grid.Row="3" Grid.Column="0" Margin="5,2,5,0" HorizontalOptions="Start" Grid.ColumnSpan="2" MaxLines="2" TextDecorations="Strikethrough">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="S/ " FontSize="13" TextColor="Black"/>
+                                            <Span Text="{Binding Precio}"  FontSize="15" TextColor="Black"      x:Name="PrecioNormal" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                        
+                                <PanCake:PancakeView Margin="5,-3,0,15" Grid.Row="4" Grid.Column="0" BackgroundColor="#F63854" CornerRadius="10" >    
+                                    <Label Margin="5,2" VerticalOptions="StartAndExpand" HorizontalOptions="Start" Grid.ColumnSpan="2" x:Name="ContenedorOferta"  >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                    <Span Text="S/ " FontSize="13" TextColor="White"/>
+                                                    <Span Text="{Binding Oferta}" FontAttributes="Bold" FontSize="13" TextColor="White"        x:Name="PrecioOferta" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </PanCake:PancakeView>
+                                
+                            </Grid>
+                            </PanCake:PancakeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

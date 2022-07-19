@@ -1,0 +1,378 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:xyt="http://xamarin.com/schemas/2020/toolkit" xmlns:customView="clr-namespace:Enneto.Views.Toolbar"
+             x:Class="Enneto.DetallesPagina">
+
+    <ContentPage.ToolbarItems >
+        <ToolbarItem IconImageSource="carrito.png"
+                     Order="Default"
+                     x:Name="Carrito"
+                     Clicked="Carrito_Clicked"/>
+        <ToolbarItem IconImageSource="usuarioi.png"
+                     Order="Default"
+                     x:Name="IniciarSesion"
+                     Clicked="IniciarSesion_Clicked"/>
+
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="CustomTab" >
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{TemplateBinding Text}"
+                           Grid.Column="0"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.Row="0"
+                           TextColor="{TemplateBinding CurrentTextColor}"/>
+                    <!--<BoxView Color="#F63854"
+                             HeightRequest="10" 
+                             WidthRequest="10" 
+                             Grid.Row="1"
+                             HorizontalOptions="CenterAndExpand" 
+                             VerticalOptions="CenterAndExpand"
+                             Margin="-45,0,0,0"
+                             CornerRadius="30"
+                             IsVisible="{TemplateBinding IsSelected}"/>--> 
+                </Grid>
+            </ControlTemplate>
+            
+            <Style x:Key="CustomTabStyle"
+                   TargetType="xyt:TabView">
+                <Setter Property="IsTabTransitionEnabled"
+                        Value="True"/>
+                <Setter Property="TabStripHeight"
+                        Value="48"/> 
+                <Setter Property="TabContentBackgroundColor"
+                        Value="#0000"/>
+                <Setter Property="TabStripPlacement"
+                        Value="Top"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <ScrollView>
+            <Grid >
+                <StackLayout VerticalOptions="FillAndExpand" HeightRequest="800" >
+                    <Grid>
+                        <!--Imagen con Detalles-->
+                        <Frame Padding="0" HeightRequest="450" >
+                            <Image 
+                                   Source="{Binding Imagen}" 
+                                   Aspect="AspectFill">
+                            </Image>
+                        </Frame>
+                        <Frame Opacity="0.9">
+                            <Frame.Background>
+                                <!-- StartPoint defaults to (0,0) -->
+                                <LinearGradientBrush EndPoint="0,2">
+                                    <GradientStop Color="#0000"
+                                                  Offset="0.1" />
+                                    <GradientStop Color="Black"
+                                                  Offset="1.0" />
+                                </LinearGradientBrush>
+                                
+                            </Frame.Background>
+                            
+                        </Frame>
+                        <StackLayout VerticalOptions="EndAndExpand" 
+                                     Margin="15,15,20,75" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding NombreProducto}"
+                                       x:Name="NombreArticulo"
+                                       Grid.Column="0"
+                                       TextColor="White" 
+                                       FontSize="27" 
+                                       FontAttributes="Bold"
+                                       Margin="0,20,5,0"/>
+                                <StackLayout Grid.Column="1"  VerticalOptions="End" HorizontalOptions="EndAndExpand" Margin="10,5">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                        <Image Source="Puntuacion.png"
+                                           HeightRequest="40"
+                                           Aspect="AspectFit"
+                                            Margin="-5,0"
+                                           HorizontalOptions="StartAndExpand"/>
+                                        <Label Text="{Binding Calificacion}" 
+                                               Grid.Column="0"
+                                               TextColor="White" 
+
+                                               VerticalOptions="Center"
+                                               FontSize="22" 
+                                               FontAttributes="None"/>  
+
+                                    </StackLayout>
+                                    <Label HorizontalOptions="CenterAndExpand"
+                                       Text="Calificacion" 
+                                       Grid.Column="0"
+                                       TextColor="White" 
+                                       FontSize="14" 
+                                       FontAttributes="None"/>
+                                </StackLayout>
+                                
+                            </Grid>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid  VerticalOptions="FillAndExpand" 
+                           Margin="0,-30,0,0"
+                           Padding="0" >
+                        <Frame CornerRadius="25" >
+                            <Grid >
+                                <xyt:TabView Style="{StaticResource CustomTabStyle}" >
+
+                                    <xyt:StateLayout.StateViews Grid.Column="1" WidthRequest="190">
+
+                                    </xyt:StateLayout.StateViews>
+
+                                    <!--Aqui se muestra la primera descripcion-->
+                                    <xyt:TabViewItem ControlTemplate="{StaticResource CustomTab}"
+                                                     Text="Informacion" 
+                                                     HorizontalOptions="FillAndExpand"
+                                                     FontSize="20"
+                                                     Margin="13,0,0,0">
+
+                                        <StackLayout >
+                                            <Grid Margin="5,0,16,0"
+                                              HorizontalOptions="CenterAndExpand"
+                                              HeightRequest="60">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+
+                                                </Grid.ColumnDefinitions>
+
+                                                <!--Precio-->
+                                                <StackLayout Grid.Column="0" >
+
+                                                    <Grid >
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="80"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="16"/>
+                                                            <RowDefinition Height="*" />
+                                                        </Grid.RowDefinitions>
+
+                                                        <StackLayout  
+                                                                    Margin="0,2"
+                                                                    Grid.Column="0"
+                                                                    Grid.RowSpan="2"
+                                                                    HeightRequest="100" 
+                                                                    VerticalOptions="Start">
+                                                                        <Image  Source="precio.png"
+                                                                            Aspect="AspectFit" 
+                                                                            HeightRequest="45"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Grid.Row="0"
+                                                                    Grid.Column="1">
+
+                                                            <StackLayout Orientation="Horizontal" 
+                                                                         HeightRequest="30"
+                                                                         Margin="-12,0,0,0">
+                                                                <Label FontSize="15"
+                                                                       TextColor="DarkGray"
+                                                                       TextDecorations="Strikethrough">
+                                                                    <Label.FormattedText >
+                                                                        <FormattedString>
+                                                                            <Span x:Name="TipoPrecio"   Text="S/"/>
+                                                                            <Span x:Name="Precio"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+                                                                </Label>
+
+                                                            </StackLayout>
+                                                        </StackLayout>
+
+                                                        <StackLayout Grid.Row="1" 
+                                                                Grid.Column="1"
+                                                                 VerticalOptions="StartAndExpand">
+
+                                                            <StackLayout Orientation="Horizontal" 
+                                                                     VerticalOptions="StartAndExpand"
+                                                                     Margin="-15,0,0,0">
+                                                                <Label 
+                                                                    FontSize="19"
+                                                                       HorizontalOptions="StartAndExpand"
+                                                                    TextColor="Black"
+                                                                    TextDecorations="None"
+                                                                    FontAttributes="Bold">
+                                                                    <Label.FormattedText >
+                                                                        <FormattedString>
+                                                                            <Span Text="S/" FontSize="13"/>
+                                                                            <Span x:Name="Oferta"/>
+                                                                        </FormattedString>
+                                                                    </Label.FormattedText>
+
+                                                                </Label>
+                                                            </StackLayout>
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+
+                                                <!--Estados-->
+                                                <StackLayout Grid.Column="1" 
+                                                        HeightRequest="35" 
+                                                        VerticalOptions="Start"
+                                                        HorizontalOptions="StartAndExpand">
+                                                    <Grid >
+                                                        <Grid.ColumnDefinitions >
+                                                            <ColumnDefinition Width="80"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                        </Grid.RowDefinitions>
+
+                                                        <StackLayout Grid.Column="0"
+                                                                Grid.RowSpan="2"
+                                                                HeightRequest="100" 
+                                                                VerticalOptions="Start"
+                                                                HorizontalOptions="Start">
+                                                            <Image Source="estado.png"
+                                                        Aspect="AspectFit" 
+                                                        HeightRequest="45"
+                                                        VerticalOptions="FillAndExpand"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Grid.Column="1" 
+                                                                    HeightRequest="100" 
+                                                                    VerticalOptions="Start"
+                                                                    Margin="-25,0,0,0">
+                                                            <Label Text="ESTADOS"
+                                                            FontSize="15"
+                                                            VerticalOptions="EndAndExpand"
+                                                            TextColor="DarkGray"/>
+                                                        </StackLayout>
+
+                                                        <StackLayout Grid.Row="1" 
+                                                            Grid.Column="1"
+                                                            HeightRequest="100" 
+                                                            VerticalOptions="Start"
+                                                            Margin="-25,0,0,0">
+
+                                                            <Label Text="{Binding Estado}"
+                                                            FontSize="16"
+                                                            VerticalOptions="EndAndExpand"
+                                                            TextColor="Black"
+                                                            TextDecorations="None"
+                                                            FontAttributes="Bold"/>
+
+                                                        </StackLayout>
+                                                    </Grid>
+                                                </StackLayout>
+
+                                            </Grid>
+
+                                            <StackLayout VerticalOptions="CenterAndExpand">
+                                                <Label  Text="Descripcion" 
+                                                        TextColor="Black" 
+                                                        FontSize="20" 
+                                                        FontAttributes="Bold" 
+                                                        Margin="15,10,0,5" />
+                                            </StackLayout>
+
+                                            <!--Aqui se muestra la segunda descripcion-->
+                                            <StackLayout Margin="10,0,20,0"
+                                                         HorizontalOptions="CenterAndExpand"
+                                                         VerticalOptions="StartAndExpand">
+                                                <Label Text="{Binding Descripcion}"
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        TextColor="Black"
+                                                        FontSize="16"/>
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                    </xyt:TabViewItem>
+
+                                    <!--Segunda Columna-->
+                                    <!--<xyt:TabViewItem ControlTemplate="{StaticResource CustomTab}"
+                                                 HorizontalOptions="FillAndExpand"
+                                                Text="Columna 2"
+                                                TextColorSelected="#F63854" >
+                                        <Grid BackgroundColor="Red"></Grid>
+
+                                    </xyt:TabViewItem>-->
+
+                                </xyt:TabView>
+                            </Grid>
+                        </Frame>
+
+                        <pancake:PancakeView
+                               CornerRadius="68"
+                               Margin="15,-35,21,15"
+                               BackgroundColor="White" 
+                               HeightRequest="70" 
+                               WidthRequest="70"
+                               Padding="6"
+                               HorizontalOptions="EndAndExpand"
+                               VerticalOptions="Start"
+                               Shadow="{pancake:ShadowMarkup Color=Red, Offset='10,10'}">
+                        </pancake:PancakeView>
+                        <pancake:PancakeView
+                               CornerRadius="68"
+                               Margin="15,-35,21,15"
+                               BackgroundColor="White" 
+                               HeightRequest="70" 
+                               WidthRequest="70"
+                               Padding="6"
+                               HorizontalOptions="EndAndExpand"
+                               VerticalOptions="Start"
+                               Shadow="{pancake:ShadowMarkup Color=Red, Offset='10,10'}">
+                            <!--<pancake:PancakeView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </pancake:PancakeView.GestureRecognizers>-->
+                            <ImageButton Source="carrito.png" 
+                                   Margin="-6"
+                                   Padding="15"
+                                   CornerRadius="68"   
+                                   BackgroundColor="White"
+                                   Clicked="ImageButton_Clicked"/>
+                        </pancake:PancakeView>
+                    </Grid>
+                </StackLayout>
+                
+                <!--<StackLayout HeightRequest="155"
+                             VerticalOptions="EndAndExpand" >
+
+                <pancake:PancakeView BackgroundColor="#F63854" 
+                           HeightRequest="55"
+                           Padding="0"
+                           CornerRadius="10,20,0,0"
+                           VerticalOptions="EndAndExpand">
+                    <Label Text="Contacta con el vendedor" 
+                           FontSize="19" 
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalOptions="CenterAndExpand"
+                           VerticalOptions="CenterAndExpand"/>
+
+                    </pancake:PancakeView>
+                </StackLayout>-->
+            
+            </Grid>
+        </ScrollView>
+
+    </ContentPage.Content>
+    
+</ContentPage>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancake="http://xamarin.com/schemas/2014/forms/design" xmlns:PanCake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Enneto.Views.Pagos.PagoConYape">
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#602278">
+            <StackLayout BackgroundColor="#602278"
+                         VerticalOptions="Center"
+                         x:Name="ContenedorQR">
+
+            <ImageButton    Margin="0,20,0,0"
+                            Source="Yape.png"
+                            HeightRequest="130"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Center"
+                            BackgroundColor="Transparent"/>
+
+                <PanCake:PancakeView BackgroundColor="White" 
+                                     WidthRequest="280"
+                                     HeightRequest="320"
+                                     HorizontalOptions="Center"
+                                     VerticalOptions="Start"
+                                     CornerRadius="8">
+                    <Image  Source="CodigoQR.png"
+                            Aspect="AspectFit"
+                            BackgroundColor="Transparent" 
+                            VerticalOptions="Start"
+                            Margin="0,5,0,0"
+                            HorizontalOptions="CenterAndExpand"
+                            HeightRequest="290"
+                            WidthRequest="280"/>
+
+                </PanCake:PancakeView>
+                
+                <PanCake:PancakeView    CornerRadius="15"
+                                        BackgroundColor="#369F98"
+                                        WidthRequest="180"
+                                        HeightRequest="35"
+                                        VerticalOptions="End"
+                                        HorizontalOptions="Center"
+                                        Margin="0,-25,0,-5">
+                    <Label Text="PAGA AQUI CON YAPE" 
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           FontSize="12"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                </PanCake:PancakeView>
+
+                <Label  
+                    Text="DeSegunda"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    FontFamily=""
+                    Margin="0,5,0,0"
+                    FontAttributes="Bold"
+                    FontSize="30"/>
+
+                <Label  
+                    Text="Carlos Fabricio"
+                    TextColor="#CDACE6"
+                    HorizontalOptions="Center"
+                    FontFamily=""
+                    Margin="0,0,0,0"
+                    FontAttributes="Bold"
+                    FontSize="18"/>
+            </StackLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

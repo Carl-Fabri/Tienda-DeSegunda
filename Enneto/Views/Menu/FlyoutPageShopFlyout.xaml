@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:pancake1="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Enneto.Views.FlyoutPageShopFlyout"
+             Title="Flyout">
+    <StackLayout>
+        <ListView x:Name="MenuItemsListView"
+              SeparatorVisibility="None"
+              HasUnevenRows="true"
+              ItemsSource="{Binding MenuItems}">
+            <ListView.Header>
+                <Grid BackgroundColor="#F63854">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="210"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="3"/>
+                    </Grid.RowDefinitions>
+
+                    <pancake1:PancakeView Grid.Column="1" 
+                                  Grid.Row="1"  
+                                  HorizontalOptions="Start" 
+                                  WidthRequest="80"
+                                  VerticalOptions="Start" 
+                                  HeightRequest="80"          
+                                  Margin="0,0,0,10" 
+                                  CornerRadius="50">
+                        <Image HeightRequest="95" 
+                               VerticalOptions="CenterAndExpand" 
+                               Aspect="AspectFill"
+                               x:Name="FotoPerfil"/>
+                    </pancake1:PancakeView>
+
+                    <Label  Grid.Column="1"
+                            Grid.Row="2"
+                            x:Name="NombrePerfiltxt"
+                            Style="{DynamicResource SubtitleStyle}"
+                            TextColor="White"
+                            FontSize="15"
+                            MaxLines="1"/>
+
+                    <Label  Grid.Column="1"
+                        Grid.Row="3"
+                        x:Name="Correotxt"
+                        Style="{DynamicResource SubtitleStyle}"
+                        TextColor="White"
+                        FontSize="14"
+                        MaxLines="1"/>
+                </Grid>
+            </ListView.Header>
+
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                            <Image  Source="{Binding Icon}" Aspect="AspectFit" Margin="5,5,15,5" WidthRequest="24"/>
+                            <Label  VerticalOptions="FillAndExpand" 
+                                    VerticalTextAlignment="Center" 
+                                    Text="{Binding Title}" 
+                                    FontSize="14"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

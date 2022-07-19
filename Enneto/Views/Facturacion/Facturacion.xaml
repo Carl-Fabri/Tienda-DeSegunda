@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Enneto.Views.Facturacion">
+    <ContentPage.ToolbarItems >
+        <!--<ToolbarItem Text="Casa"
+                 IconImageSource="housewhite.png"
+                 Order="Default"
+                 Priority="0" 
+                 x:Name="Inicio"
+                 Clicked="Inicio_Clicked_1"/>-->
+
+        <ToolbarItem Text="Carrito"
+                 IconImageSource="carrito.png"
+                 Order="Default"
+                 Priority="0" 
+                 x:Name="Carrito"
+                 Clicked="Carrito_Clicked"/>
+
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+
+        <ScrollView>
+        <StackLayout>
+           
+            <!--Monto a Pagar-->
+            <Grid ColumnDefinitions="30,120,*,32"
+                  RowDefinitions="50,50,50,50,40" 
+                  Margin="0">
+
+                <!--Primera Fila de Datos a Insertar-->
+                <Label Grid.Column="1" 
+                       Grid.Row="1"  
+                       Text="Dirección 1:"
+                       FontSize="15"
+                       HorizontalOptions="StartAndExpand"
+                       TextColor="Black"/>
+
+                <Entry Grid.Column="2" 
+                       Grid.Row="1"  
+                       FontSize="15"
+                       WidthRequest="190"
+                       HeightRequest="40"
+                       Margin="0,-7,0,0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="EndAndExpand"
+                       TextColor="Black"
+                       x:Name="PrimeraDireccion"/>
+
+                <!--Segunda Fila de Datos a Insertar-->
+                <Label Grid.Column="1" 
+                       Grid.Row="2"  
+                       Text="Dirección 2:"
+                       FontSize="15"
+                       HorizontalOptions="StartAndExpand"
+                       TextColor="Black"/>
+
+                <Entry Grid.Column="2" 
+                       Grid.Row="2"  
+                       FontSize="15"
+                       WidthRequest="190"
+                       HeightRequest="40"
+                       Margin="0,-7,0,0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="EndAndExpand"
+                       TextColor="Black"
+                       x:Name="SegundaDireccion"/>
+                
+                
+                <!--Tercera Fila de Datos a Insertar-->
+                <Label Grid.Column="1" 
+                       Grid.Row="3"  
+                       Text="Dirección 3: (Opcional)"
+                       FontSize="15"
+                       HorizontalOptions="StartAndExpand"
+                       TextColor="Black"/>
+
+                <Entry Grid.Column="2" 
+                       Grid.Row="3"  
+                       FontSize="15"
+                       WidthRequest="190"
+                       HeightRequest="40"
+                       Margin="0,-7,0,0"
+                       VerticalOptions="Start"
+                       HorizontalOptions="EndAndExpand"
+                       TextColor="Black"
+                       x:Name="TerceraDireccion"/>
+
+                <!--Cuarta Fila de Datos-->
+                <Label Grid.Column="1" 
+                       Grid.Row="4"  
+                       Text="Monto a Pagar"
+                       FontSize="15"
+                       VerticalOptions="End"
+                       HorizontalOptions="StartAndExpand"
+                       TextColor="Black"/>
+                
+                <Label Grid.Column="2" 
+                       Grid.Row="4"  
+                       FontSize="15"
+                       VerticalOptions="End"
+                       HorizontalOptions="EndAndExpand"
+                       TextColor="Black">
+                    <Label.FormattedText >
+                        <FormattedString>
+                            <Span Text="S/" />
+                            <Span x:Name="PagoFinal"/>
+                        </FormattedString>
+                    </Label.FormattedText >
+                </Label>
+
+            </Grid>
+
+            <!--Medios de Pago-->
+            <Button     Text="Pagar con Yape"
+                        CornerRadius="20"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Center"
+                        WidthRequest="300"
+                        HeightRequest="50"
+                        BackgroundColor="#F63854"
+                        TextColor="White"
+                        Margin="10,30,10,10"
+                        x:Name="YapePago"
+                        Clicked="YapePago_Clicked"/>
+
+                <Button     Text="Pagar con Agora"
+                        CornerRadius="20"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Center"
+                        WidthRequest="300"
+                        HeightRequest="50"
+                        BackgroundColor="#00B0FF"
+                        TextColor="White"
+                        Margin="10,0,10,10"
+                        x:Name="AgoraPago"
+                        Clicked="AgoraPago_Clicked"/>
+
+
+                <Button     Text="Pagar con Plin"
+                        CornerRadius="20"
+                        VerticalOptions="Start"
+                        HorizontalOptions="Center"
+                        WidthRequest="300"
+                        HeightRequest="50"
+                        BackgroundColor="Aquamarine"
+                        TextColor="White"
+                        Margin="10,0,10,10"
+                        x:Name="PlinPago"
+                        Clicked="PlinPago_Clicked"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
